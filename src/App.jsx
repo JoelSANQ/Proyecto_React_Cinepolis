@@ -12,6 +12,7 @@ import Cartelera from "./pages/Cartelera"
 import Detalle from "./pages/Detalle"    
 import Comida from "./pages/Food"   
 import Membresia from "./pages/membresia"
+import Palomitas from "./pages/Detalle_Palomitas"
 function App() {
   // Estado que controla qué vista se muestra   "Estado": Unknown word.
   const [vistaActual, setVistaActual] = useState("home")
@@ -28,6 +29,7 @@ function App() {
       {vistaActual === "detalle" && <Detalle />}   
       {vistaActual === "comida" && <Comida cambiarVista={setVistaActual} />} 
       {vistaActual === "membresia" && <Membresia cambiarVista={setVistaActual} />} 
+      {vistaActual === "palomitas" && <Palomitas cambiarVista={setVistaActual} />}
     </div>
   )
 }
