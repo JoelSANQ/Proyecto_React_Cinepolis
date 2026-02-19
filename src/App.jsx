@@ -13,6 +13,10 @@ import Detalle from "./pages/Detalle"
 import Comida from "./pages/Food"   
 import Membresia from "./pages/membresia"
 import Palomitas from "./pages/Detalle_Palomitas"
+import Refrescos from "./pages/Detalle_Refrescos"
+import Combos from "./pages/Detalle_Combos" 
+import Dulces from "./pages/Detalle_Dulces"
+
 function App() {
   // Estado que controla qué vista se muestra   "Estado": Unknown word.
   const [vistaActual, setVistaActual] = useState("home")
@@ -30,6 +34,9 @@ function App() {
       {vistaActual === "comida" && <Comida cambiarVista={setVistaActual} />} 
       {vistaActual === "membresia" && <Membresia cambiarVista={setVistaActual} />} 
       {vistaActual === "palomitas" && <Palomitas cambiarVista={setVistaActual} />}
+      {vistaActual === "refrescos" && <Refrescos cambiarVista={setVistaActual} />}
+      {vistaActual === "combos" && <Combos cambiarVista={setVistaActual} />}
+      {vistaActual === "dulces" && <Dulces cambiarVista={setVistaActual} />}
     </div>
   )
 }
