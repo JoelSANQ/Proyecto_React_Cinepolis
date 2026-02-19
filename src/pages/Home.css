@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  display: grid;
+  gap: 16px;
+
+  /* 🔥 evita overflow/corte */
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+}
