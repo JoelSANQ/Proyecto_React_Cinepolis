@@ -2,12 +2,12 @@
 function Header({ cambiarVista }) {  
   return (
     <header
-      style={{
-        width: "100%",        // ocupa TODO el ancho de la pantalla
-        boxSizing: "border-box",
-        backgroundColor: "#253faf"
-      }}
-    >
+  style={{
+    width: "100%",
+    boxSizing: "border-box",
+    backgroundColor: "#253faf"
+  }}
+>
       {/* Contenedor interno para ordenar contenido */}   
       <div
         style={{

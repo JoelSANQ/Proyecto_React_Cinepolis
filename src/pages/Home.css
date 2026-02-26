@@ -6,7 +6,9 @@
   box-sizing: border-box;
   display: grid;
   gap: 16px;
+  box-shadow: 20px;
 
   /* 🔥 evita overflow/corte */
   grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
 }
+

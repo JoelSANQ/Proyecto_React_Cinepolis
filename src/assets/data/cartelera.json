@@ -1,0 +1,33 @@
+[
+
+  {
+    "id": 101,
+    "titulo": "Venganza",
+    "imagen": "https://tickets-static-content.cinepolis.com/pimcore/14288/assets/Mexico/Tickets/Movies/Venganza/Es/VNGZ_DESKTOP_P_ster_720x1022px_23/resource.jpg",
+    "descripcion": "El brutal asesinato de su esposa convierte a Carlos Estrada \"Toro\", héroe militar de las fuerzas especiales, en un hombre con un solo propósito: venganza. Tras un golpe del destino que lo hace millonario, Carlos transforma su fortuna en un arsenal y junto a sus soldados más cercanos busca cazar a los responsables."
+  },
+  {
+    "id": 102,
+    "titulo": "Scream 7",
+    "imagen": "https://tickets-static-content.cinepolis.com/pimcore/12406/assets/Mexico/Tickets/Movies/Scream7/Es/SCM_Desktop_Poster_720x1022_59/resource.jpg",
+    "descripcion": "Cuando un nuevo asesino Ghostface aparece en la tranquila ciudad donde Sidney Prescott (Neve Campbell) ha construido una nueva vida, sus peores temores se hacen realidad cuando su hija (Isabel May) se convierte en el próximo objetivo. Decidida a proteger a su familia, Sidney debe enfrentarse a los horrores de su pasado para poner fin al derramamiento de sangre de una vez por todas"
+  },
+  {
+    "id": 103,
+    "titulo": "Juicio Del Siglo",
+    "imagen": "https://tickets-static-content.cinepolis.com/pimcore/13192/assets/Mexico/Tickets/Movies/CumbresBorrascosas/Es/Po_ster_720X1022_53/resource.jpg",
+    "descripcion": "Tras el final de la Segunda Guerra Mundial, el psiquiatra del Ejército estadounidense, el teniente coronel Douglas Kelley, es asignado a evaluar a Hermann Göring y a otros altos funcionarios nazis mientras los Aliados preparan los históricos Juicios de Nuremberg. A medida que Kelley se adentra en la mente de los líderes del régimen, se enfrenta a una cruda realidad: cómo hombres comunes son capaces de una maldad extraordinaria."
+  },
+  {
+    "id": 104,
+    "titulo": "Nuremberg: El Juicio Del Siglo",
+    "imagen": "https://tickets-static-content.cinepolis.com/pimcore/14033/assets/Mexico/Tickets/Movies/NurembergElJuicioDelSiglo/Es/Poster_720x1022_N_23/resource.jpg",
+    "descripcion": "Tras el final de la Segunda Guerra Mundial, el psiquiatra del Ejército estadounidense, el teniente coronel Douglas Kelley, es asignado a evaluar a Hermann Göring y a otros altos funcionarios nazis mientras los Aliados preparan los históricos Juicios de Nuremberg. A medida que Kelley se adentra en la mente de los líderes del régimen, se enfrenta a una cruda realidad: cómo hombres comunes son capaces de una maldad extraordinaria."
+  },
+  {
+    "id": 105,
+    "titulo": "La empleada",
+    "imagen": "https://tse3.mm.bing.net/th/id/OIP.7C-tSg4rMHgeVfx2ekSe9wHaJQ?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "descripcion": "Una historia dramática sobre secretos ocultos."
+  }
+]

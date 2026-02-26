@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
 import './App.css'
 import './pages/Home.css'
 
 
-// Componentes   "Componentes": Misspelled word.
+// Componentes 
 import Header from "./components/Header"
+// Importamos el nuevo componente (Asegúrate de haberlo creado como CarritoGlobal.jsx)
+import { CarritoGlobal } from "./components/Carrito"
 
 // Vistas
 import Home from "./pages/Home"
@@ -18,9 +20,17 @@ import Combos from "./pages/Detalle_Combos"
 import Dulces from "./pages/Detalle_Dulces"
 
 function App() {
-  // Estado que controla qué vista se muestra   "Estado": Unknown word.
+  // Estado que controla qué vista se muestra 
   const [vistaActual, setVistaActual] = useState("home")
   const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null)
+  
+  // Estado para el carrito acumulativo (pop-up)
+  const [carrito, setCarrito] = useState([])
+
+  // Función para agregar productos al carrito desde cualquier vista
+  function agregarAlCarrito(producto) {
+    setCarrito([...carrito, producto])
+  }
 
     // Función para ir a detalle enviando datos
   function verDetalle(pelicula) {
@@ -29,39 +39,36 @@ function App() {
   }
 
   return (
-    // Contenedor raíz de la aplicación   "Contenedor": Unknown word.
+    // Contenedor raíz de la aplicación 
     <div style={{ minHeight: "100vh" }}>
       {/* Header puede cambiar la vista */}   
       <Header cambiarVista={setVistaActual} />   
 
       {/* Renderizado condicional de vistas */}   
       
- 
-
       {vistaActual === "comida" && <Comida cambiarVista={setVistaActual} />} 
       {vistaActual === "membresia" && <Membresia cambiarVista={setVistaActual} />} 
-      {vistaActual === "palomitas" && <Palomitas cambiarVista={setVistaActual} />}
-      {vistaActual === "refrescos" && <Refrescos cambiarVista={setVistaActual} />}
-      {vistaActual === "combos" && <Combos cambiarVista={setVistaActual} />}
-      {vistaActual === "dulces" && <Dulces cambiarVista={setVistaActual} />}
-          {/* Renderizado condicional, el triple "=" es para asegurar que solo se cumpla la condición si es exactamente igual */}
-      {vistaActual === "home" && (
-        <Home verDetalle={verDetalle} />
-      )}
+      
+      {/* Pasamos la función agregarAlCarrito a las vistas de productos */}
+      {vistaActual === "palomitas" && <Palomitas cambiarVista={setVistaActual} onAgregar={agregarAlCarrito} />}
+      {vistaActual === "refrescos" && <Refrescos cambiarVista={setVistaActual} onAgregar={agregarAlCarrito} />}
+      {vistaActual === "combos" && <Combos cambiarVista={setVistaActual} onAgregar={agregarAlCarrito} />}
+      {vistaActual === "dulces" && <Dulces cambiarVista={setVistaActual} onAgregar={agregarAlCarrito} />}
+      
+      {/* Renderizado condicional */}
+      {vistaActual === "home" && ( <Home verDetalle={verDetalle} /> )}
+      {vistaActual === "cartelera" && (<Cartelera verDetalle={verDetalle} />)}
+      {vistaActual === "detalle" && (  <Detalle pelicula={peliculaSeleccionada} />)}
 
-      {vistaActual === "cartelera" && (
-        <Cartelera verDetalle={verDetalle} />
-      )}
-
-      {vistaActual === "detalle" && (
-        <Detalle pelicula={peliculaSeleccionada} />
-      )}
+      {/* COMPONENTE CARRITO GLOBAL (POP-UP) */}
+      {/* Se mantiene accesible en todas las vistas si hay productos */}
+      <CarritoGlobal 
+        listaProductos={carrito} 
+        setListaProductos={setCarrito} 
+      />
     </div>
   )
 }
 
-// Exportamos App   "Exportamos": Unknown word.
+// Exportamos App
 export default App
-
-
-

@@ -1,40 +1,30 @@
+import React from 'react';
 
-
-
-// Tarjeta de película reutilizable   "Tarjeta": Unknown word.
-function FoodCard({ title, image, }) {  
+function FoodCard({ title, image, onAgregar }) {
   return (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        overflow: "hidden", // Oculta lo que se salga del contenDedor   
-        boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-        minWidth: 0 
-      }}
-    >
-      {/* Imagen de la película */}   
-      <img
-        src={image}
-        alt={title}
-        style={{
-         width: "100%",
-        aspectRatio: "2 / 3",   // poster
-        objectFit: "cover",
-        height: "300px",
-        display: "block" // Mantiene proporción sin deformar   
-            }}
-        />
-
-      {/* Contenido de la tarjeta */}   
-      <div style={{ padding: "12px", textAlign: "center" }}>
-        <h3>{title}</h3>
+    <div style={{ display: "inline-block", margin: "10px" }}>
+      <div style={{
+        border: "1px solid #444",
+        borderRadius: "10px",
+        overflow: "hidden",
+        backgroundColor: "#1c1c1c",
+        textAlign: "center",
+        color: "white",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.5)"
+      }}>
+        <img src={image} alt={title} style={{ width: "100%", height: "180px", objectFit: "cover" }} />
+        <div style={{ padding: "15px" }}>
+          <h4 style={{ fontSize: "1rem", margin: "10px 0", fontWeight: "bold" }}>{title}</h4>
+          <button 
+            onClick={() => onAgregar({ title, image })}
+            style={{ backgroundColor: "#ff9800", color: "white", border: "none", padding: "8px 20px", borderRadius: "5px", cursor: "pointer", fontWeight: "bold" }}
+          >
+            Agregar producto
+          </button>
+        </div>
       </div>
     </div>
-
-    
-  )
+  );
 }
 
-// Exportamos el componente   
-export default FoodCard
+export default FoodCard;
