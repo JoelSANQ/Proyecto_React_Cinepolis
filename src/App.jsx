@@ -20,6 +20,13 @@ import Dulces from "./pages/Detalle_Dulces"
 function App() {
   // Estado que controla qué vista se muestra   "Estado": Unknown word.
   const [vistaActual, setVistaActual] = useState("home")
+  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null)
+
+    // Función para ir a detalle enviando datos
+  function verDetalle(pelicula) {
+    setPeliculaSeleccionada(pelicula)
+    setVistaActual("detalle")
+  }
 
   return (
     // Contenedor raíz de la aplicación   "Contenedor": Unknown word.
@@ -28,15 +35,27 @@ function App() {
       <Header cambiarVista={setVistaActual} />   
 
       {/* Renderizado condicional de vistas */}   
-      {vistaActual === "home" && <Home cambiarVista={setVistaActual} />}   
-      {vistaActual === "cartelera" && <Cartelera cambiarVista={setVistaActual} />}  
-      {vistaActual === "detalle" && <Detalle />}   
+      
+ 
+
       {vistaActual === "comida" && <Comida cambiarVista={setVistaActual} />} 
       {vistaActual === "membresia" && <Membresia cambiarVista={setVistaActual} />} 
       {vistaActual === "palomitas" && <Palomitas cambiarVista={setVistaActual} />}
       {vistaActual === "refrescos" && <Refrescos cambiarVista={setVistaActual} />}
       {vistaActual === "combos" && <Combos cambiarVista={setVistaActual} />}
       {vistaActual === "dulces" && <Dulces cambiarVista={setVistaActual} />}
+          {/* Renderizado condicional, el triple "=" es para asegurar que solo se cumpla la condición si es exactamente igual */}
+      {vistaActual === "home" && (
+        <Home verDetalle={verDetalle} />
+      )}
+
+      {vistaActual === "cartelera" && (
+        <Cartelera verDetalle={verDetalle} />
+      )}
+
+      {vistaActual === "detalle" && (
+        <Detalle pelicula={peliculaSeleccionada} />
+      )}
     </div>
   )
 }
