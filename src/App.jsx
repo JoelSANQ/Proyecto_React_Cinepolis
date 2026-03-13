@@ -7,6 +7,7 @@ import './pages/Home.css'
 import Header from "./components/Header"
 // Importamos el nuevo componente (Asegúrate de haberlo creado como CarritoGlobal.jsx)
 import { CarritoGlobal } from "./components/Carrito"
+import Footer from "./components/Footer"
 
 // Vistas
 import Home from "./pages/Home"
@@ -59,6 +60,9 @@ function App() {
       {vistaActual === "home" && ( <Home verDetalle={verDetalle} /> )}
       {vistaActual === "cartelera" && (<Cartelera verDetalle={verDetalle} />)}
       {vistaActual === "detalle" && (  <Detalle pelicula={peliculaSeleccionada} />)}
+
+      {/* Footer global en todas las secciones */}
+      <Footer />
 
       {/* COMPONENTE CARRITO GLOBAL (POP-UP) */}
       {/* Se mantiene accesible en todas las vistas si hay productos */}
