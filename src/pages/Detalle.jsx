@@ -1,7 +1,16 @@
 import { useState, useEffect } from "react"
+import { useLocation, useParams } from "react-router-dom"
 import Button from "../components/Button"
+import carteleraData from "../assets/data/cartelera.json"
+import detallesData from "../assets/data/detalles.json"
 
-function Detalle({ pelicula }) {
+function Detalle() {
+  const { id } = useParams()
+  const location = useLocation()
+
+  // Intentamos obtener la película del state, si no, la buscamos por ID en la data
+  const [pelicula, setPelicula] = useState(location.state?.pelicula || null)
+
   const [nombre, setNombre] = useState("")
   const [cantidadBoletos, setCantidadBoletos] = useState(1)
   const [mensaje, setMensaje] = useState("")
@@ -15,18 +24,28 @@ function Detalle({ pelicula }) {
   const [mostrarModal, setMostrarModal] = useState(false)
 
   useEffect(() => {
+    // Si no tenemos la película en el state (ej: recarga de página), la buscamos
+    if (!pelicula && id) {
+      const todasLasPeliculas = [...carteleraData, ...detallesData]
+      const encontrada = todasLasPeliculas.find(p => p.id.toString() === id)
+      if (encontrada) {
+        setPelicula(encontrada)
+      }
+    }
+
     const guardados = JSON.parse(localStorage.getItem("favoritos")) || []
     setFavoritos(guardados)
     if (pelicula) {
       setEsFavorito(guardados.some(f => f.titulo === pelicula.titulo))
     }
-  }, [pelicula])
+  }, [id, pelicula])
 
   // Lógica de Favoritos (Toggle y Eliminar)
   function agregarFavoritos() {
+    if (!pelicula) return
     let nuevos = [...favoritos]
     const indice = nuevos.findIndex(f => f.titulo === pelicula.titulo)
-    
+
     if (indice === -1) {
       nuevos.push(pelicula)
       setEsFavorito(true)
@@ -34,7 +53,7 @@ function Detalle({ pelicula }) {
       nuevos.splice(indice, 1)
       setEsFavorito(false)
     }
-    
+
     actualizarFavoritos(nuevos)
   }
 
@@ -61,7 +80,12 @@ function Detalle({ pelicula }) {
     setListaComentarios(listaComentarios.filter((_, i) => i !== index))
   }
 
-  if (!pelicula) return <h2 style={{ color: "white", textAlign: "center" }}>No hay película seleccionada</h2>
+  if (!pelicula) return (
+    <div style={{ textAlign: "center", padding: "50px", color: "white" }}>
+      <h2>No hay película seleccionada</h2>
+      <p>Vuelve a la cartelera para elegir una película.</p>
+    </div>
+  )
 
   function manejarCompra(e) {
     e.preventDefault()
@@ -71,7 +95,7 @@ function Detalle({ pelicula }) {
 
   return (
     <main style={{ padding: "24px", maxWidth: "800px", margin: "0 auto", color: "white", fontFamily: "Arial, sans-serif" }}>
-      
+
       {/* Contenedor Imagen */}
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <h2 style={{ marginBottom: "10px" }}>{pelicula.titulo}</h2>
@@ -81,9 +105,9 @@ function Detalle({ pelicula }) {
 
       {/* Botones de Acción */}
       <div style={{ display: "flex", gap: "15px", justifyContent: "center", marginBottom: "40px" }}>
-        <Button 
-          text={esFavorito ? "Quitar de Favoritos" : "Agregar a Favoritos"} 
-          onClick={agregarFavoritos} 
+        <Button
+          text={esFavorito ? "Quitar de Favoritos" : "Agregar a Favoritos"}
+          onClick={agregarFavoritos}
         />
         <Button text="Escribir Comentario" onClick={() => setMostrarModal(true)} />
       </div>
@@ -105,7 +129,7 @@ function Detalle({ pelicula }) {
       <section style={{ marginBottom: "40px" }}>
         <h3 style={{ marginBottom: "15px" }}>Reseñas de usuarios</h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {listaComentarios.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Aún no hay reseñas...</p> : 
+          {listaComentarios.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Aún no hay reseñas...</p> :
             listaComentarios.map((c, i) => (
               <div key={i} style={{ background: "#222", padding: "15px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center", borderLeft: "4px solid #ff9800", boxShadow: "0 4px 6px rgba(0,0,0,0.2)" }}>
                 <span>{c}</span>
@@ -120,11 +144,11 @@ function Detalle({ pelicula }) {
       <section>
         <h3 style={{ marginBottom: "15px" }}>Mi Lista de Favoritos</h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {favoritos.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Tu lista está vacía.</p> : 
+          {favoritos.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Tu lista está vacía.</p> :
             favoritos.map((fav, i) => (
               <div key={i} style={{ background: "#222", padding: "12px 15px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center", borderLeft: "4px solid #ff9800", boxShadow: "0 4px 6px rgba(0,0,0,0.2)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-                   <span style={{ fontWeight: "bold" }}>{fav.titulo}</span>
+                  <span style={{ fontWeight: "bold" }}>{fav.titulo}</span>
                 </div>
                 <button onClick={() => eliminarFavoritoDeLista(fav.titulo)} style={{ background: "transparent", color: "#ff4444", border: "none", cursor: "pointer", fontSize: "1.2rem" }}>✕</button>
               </div>
@@ -138,8 +162,8 @@ function Detalle({ pelicula }) {
         <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", background: "rgba(0,0,0,0.85)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
           <div style={{ background: "#1a1a1a", padding: "30px", borderRadius: "15px", width: "90%", maxWidth: "400px", border: "1px solid #ff9800", boxShadow: "0 0 20px rgba(255, 152, 0, 0.2)" }}>
             <h3 style={{ marginBottom: "15px", marginTop: 0 }}>Deja tu opinión</h3>
-            <textarea 
-              value={comentario} 
+            <textarea
+              value={comentario}
               onChange={(e) => setComentario(e.target.value)}
               placeholder="¿Qué te pareció la película?"
               style={{ width: "100%", height: "100px", padding: "10px", borderRadius: "5px", background: "#333", color: "white", border: "1px solid #444", marginBottom: "15px", outline: "none", resize: "none" }}

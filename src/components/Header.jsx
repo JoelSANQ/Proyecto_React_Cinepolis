@@ -1,14 +1,15 @@
+import { Link, NavLink } from 'react-router-dom';
 
-function Header({ cambiarVista }) {  
+function Header() {
   return (
     <header
-  style={{
-    width: "100%",
-    boxSizing: "border-box",
-    backgroundColor: "#253faf"
-  }}
->
-      {/* Contenedor interno para ordenar contenido */}   
+      style={{
+        width: "100%",
+        boxSizing: "border-box",
+        backgroundColor: "#253faf"
+      }}
+    >
+      {/* Contenedor interno para ordenar contenido */}
       <div
         style={{
           display: "flex",
@@ -21,45 +22,52 @@ function Header({ cambiarVista }) {
           gap: "16px"
         }}
       >
-        <h1 style={{ margin: 0 }}>Cinepolis</h1>   
+        <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+          <h1 style={{ margin: 0 }}>Cinepolis</h1>
+        </Link>
         <nav
-  style={{
-    display: "flex",
-    gap: "24px",
-    flexWrap: "wrap",
-    justifyContent: "flex-end"
-  }}
->
-  <span
-    style={{ cursor: "pointer" }}
-    onClick={() => cambiarVista("home")}
-  >
-    Inicio
-  </span>
+          style={{
+            display: "flex",
+            gap: "24px",
+            flexWrap: "wrap",
+            justifyContent: "flex-end",
+            alignItems: "center"
+          }}
+        >
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+            style={{ color: "white", textDecoration: "none", cursor: "pointer" }}
+          >
+            Inicio
+          </NavLink>
 
-  <span
-    style={{ cursor: "pointer" }}
-    onClick={() => cambiarVista("cartelera")}
-  >
-    Cartelera
-  </span>
+          <NavLink
+            to="/cartelera"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+            style={{ color: "white", textDecoration: "none", cursor: "pointer" }}
+          >
+            Cartelera
+          </NavLink>
 
-  <span
-    style={{ cursor: "pointer" }}
-    onClick={() => cambiarVista("comida")}
-  >
-    Alimentos
-  </span>
-  <span
-    style={{ cursor: "pointer" }}
-    onClick={() => cambiarVista("membresia")}
-  >
-    Membresía
-  </span>
-</nav>
-</div>
-</header>
-)
+          <NavLink
+            to="/comida"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+            style={{ color: "white", textDecoration: "none", cursor: "pointer" }}
+          >
+            Alimentos
+          </NavLink>
+          <NavLink
+            to="/membresia"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+            style={{ color: "white", textDecoration: "none", cursor: "pointer" }}
+          >
+            Membresía
+          </NavLink>
+        </nav>
+      </div>
+    </header>
+  )
 }
 
 export default Header

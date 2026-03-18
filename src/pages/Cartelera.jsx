@@ -1,18 +1,23 @@
+import { useNavigate } from "react-router-dom"
 import MovieCard from "../components/MovieCard"
 import cartelera from "../assets/data/cartelera.json";
 
 
-function Cartelera({ verDetalle }) {
+function Cartelera() {
+  const navigate = useNavigate()
 
-  
+  function verDetalle(pelicula) {
+    navigate(`/pelicula/${pelicula.id}`, { state: { pelicula } })
+  }
+
   return (
     <main className="container">
-      {cartelera.map((cartelera) => (
+      {cartelera.map((pelicula) => (
         <MovieCard
-          key={cartelera.id}
-          title={cartelera.titulo}
-          image={cartelera.imagen}
-          onVerDetalle={() => verDetalle(cartelera)}
+          key={pelicula.id}
+          title={pelicula.titulo}
+          image={pelicula.imagen}
+          onVerDetalle={() => verDetalle(pelicula)}
         />
       ))}
     </main>

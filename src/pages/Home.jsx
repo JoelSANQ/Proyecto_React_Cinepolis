@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules"
 
@@ -11,7 +12,13 @@ import MovieCard from "../components/MovieCard"
 import peliculas from "../assets/data/detalles.json"
 import "./Home.css"
 
-function Home({ verDetalle }) {
+function Home() {
+  const navigate = useNavigate()
+
+  function verDetalle(pelicula) {
+    navigate(`/pelicula/${pelicula.id}`, { state: { pelicula } })
+  }
+
   return (
     <>
       {/* ===== HERO CAROUSEL ===== */}
@@ -58,8 +65,8 @@ function Home({ verDetalle }) {
                       onClick={() => verDetalle(pelicula)}
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none" />
                       </svg>
                       Comprar boletos
                     </button>
