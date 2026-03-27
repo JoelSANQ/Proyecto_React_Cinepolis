@@ -1,25 +1,14 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import './App.css'
-import './pages/Home.css'
-
+import './styles/App.css'
+import './styles/Home.css'
 
 // Componentes 
 import Header from "./components/Header"
-// Importamos el nuevo componente (Asegúrate de haberlo creado como CarritoGlobal.jsx)
 import { CarritoGlobal } from "./components/Carrito"
 import Footer from "./components/Footer"
 
-// Vistas
-import Home from "./pages/Home"
-import Cartelera from "./pages/Cartelera"
-import Detalle from "./pages/Detalle"
-import Comida from "./pages/Food"
-import Membresia from "./pages/membresia"
-import Palomitas from "./pages/Detalle_Palomitas"
-import Refrescos from "./pages/Detalle_Refrescos"
-import Combos from "./pages/Detalle_Combos"
-import Dulces from "./pages/Detalle_Dulces"
+// Routing
+import AppRouter from './routes/AppRouter';
 
 function App() {
   // Estado para el carrito acumulativo (pop-up)
@@ -37,19 +26,7 @@ function App() {
       <Header />
 
       {/* Definición de Rutas */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cartelera" element={<Cartelera />} />
-        <Route path="/pelicula/:id" element={<Detalle />} />
-        <Route path="/comida" element={<Comida />} />
-        <Route path="/membresia" element={<Membresia />} />
-
-        {/* Rutas de productos de comida */}
-        <Route path="/comida/palomitas" element={<Palomitas onAgregar={agregarAlCarrito} />} />
-        <Route path="/comida/refrescos" element={<Refrescos onAgregar={agregarAlCarrito} />} />
-        <Route path="/comida/combos" element={<Combos onAgregar={agregarAlCarrito} />} />
-        <Route path="/comida/dulces" element={<Dulces onAgregar={agregarAlCarrito} />} />
-      </Routes>
+      <AppRouter agregarAlCarrito={agregarAlCarrito} />
 
       {/* Footer global en todas las secciones */}
       <Footer />

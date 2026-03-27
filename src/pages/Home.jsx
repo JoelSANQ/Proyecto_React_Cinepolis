@@ -9,8 +9,8 @@ import "swiper/css/pagination"
 import "swiper/css/effect-fade"
 
 import MovieCard from "../components/MovieCard"
-import peliculas from "../assets/data/detalles.json"
-import "./Home.css"
+import peliculas from "../data/detalles.json"
+import "../styles/Home.css"
 
 function Home() {
   const navigate = useNavigate()

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import MovieCard from "../components/MovieCard"
-import cartelera from "../assets/data/cartelera.json";
+import cartelera from "../data/cartelera.json";
 
 
 function Cartelera() {

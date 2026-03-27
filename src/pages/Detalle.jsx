@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { useLocation, useParams } from "react-router-dom"
 import Button from "../components/Button"
-import carteleraData from "../assets/data/cartelera.json"
-import detallesData from "../assets/data/detalles.json"
+import carteleraData from "../data/cartelera.json"
+import detallesData from "../data/detalles.json"
 
 function Detalle() {
   const { id } = useParams()

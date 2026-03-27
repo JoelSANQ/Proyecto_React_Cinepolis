@@ -1,4 +1,4 @@
-import "./membresia.css"
+import "../styles/Membresia.css"
 
 import fan from "../assets/cinepolis fan.jpg"
 import fanatico from "../assets/fanatico.jpg"
