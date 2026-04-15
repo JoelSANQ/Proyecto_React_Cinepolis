@@ -94,68 +94,103 @@ function Detalle() {
   }
 
   return (
-    <main style={{ padding: "24px", maxWidth: "800px", margin: "0 auto", color: "white", fontFamily: "Arial, sans-serif" }}>
+    <main style={{
+      padding: "24px",
+      maxWidth: "1100px",
+      margin: "0 auto",
+      color: "white",
+      fontFamily: "Arial, sans-serif",
+      display: "flex",
+      gap: "40px",
+      alignItems: "flex-start",
+      flexWrap: "wrap"
+    }}>
 
-      {/* Contenedor Imagen */}
-      <div style={{ textAlign: "center", marginBottom: "20px" }}>
-        <h2 style={{ marginBottom: "10px" }}>{pelicula.titulo}</h2>
-        <img src={pelicula.imagen} alt={pelicula.titulo} style={{ width: "100%", maxWidth: "500px", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.5)" }} />
-        <p style={{ marginTop: "15px", color: "#bbb" }}>{pelicula.descripcion}</p>
-      </div>
+      {/* CONTENEDOR IZQUIERDO: Visual y Descriptivo */}
+      <div style={{
+        flex: "1",
+        minWidth: "320px",
+        padding: "20px",
+        background: "rgba(255, 255, 255, 0.03)", // Fondo sutil opcional
+        borderRadius: "15px"
+      }}>
+        <h2 style={{ marginBottom: "15px", textAlign: "center" }}>{pelicula.titulo}</h2>
 
-      {/* Botones de Acción */}
-      <div style={{ display: "flex", gap: "15px", justifyContent: "center", marginBottom: "40px" }}>
-        <Button
-          text={esFavorito ? "Quitar de Favoritos" : "Agregar a Favoritos"}
-          onClick={agregarFavoritos}
-        />
-        <Button text="Escribir Comentario" onClick={() => setMostrarModal(true)} />
-      </div>
-
-      {/* Formulario Compra */}
-      <section style={{ background: "#1a1a1a", padding: "20px", borderRadius: "10px", marginBottom: "30px", border: "1px solid #333" }}>
-        <h3 style={{ borderBottom: "2px solid #ff9800", paddingBottom: "10px", marginTop: 0 }}>Comprar boletos</h3>
-        <form onSubmit={manejarCompra} style={{ marginTop: "15px" }}>
-          <label>Nombre:</label>
-          <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} style={{ display: "block", width: "100%", padding: "10px", margin: "8px 0", background: "#333", border: "1px solid #444", color: "white", borderRadius: "5px" }} required />
-          <label>Boletos:</label>
-          <input type="number" min="1" value={cantidadBoletos} onChange={(e) => setCantidadBoletos(e.target.value)} style={{ display: "block", width: "100%", padding: "10px", margin: "8px 0", background: "#333", border: "1px solid #444", color: "white", borderRadius: "5px" }} required />
-          <button type="submit" style={{ padding: "10px 20px", backgroundColor: "#ff9800", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontWeight: "bold" }}>Comprar</button>
-        </form>
-        {mensaje && <p style={{ color: "#4caf50", marginTop: "10px" }}>{mensaje}</p>}
-      </section>
-
-      {/* Sección Reseñas */}
-      <section style={{ marginBottom: "40px" }}>
-        <h3 style={{ marginBottom: "15px" }}>Reseñas de usuarios</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {listaComentarios.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Aún no hay reseñas...</p> :
-            listaComentarios.map((c, i) => (
-              <div key={i} style={{ background: "#222", padding: "15px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center", borderLeft: "4px solid #ff9800", boxShadow: "0 4px 6px rgba(0,0,0,0.2)" }}>
-                <span>{c}</span>
-                <button onClick={() => eliminarComentario(i)} style={{ background: "transparent", color: "#ff4444", border: "none", cursor: "pointer", fontSize: "1.2rem", marginLeft: "10px" }}>✕</button>
-              </div>
-            ))
-          }
+        <div style={{ textAlign: "center" }}>
+          <img
+            src={pelicula.imagen}
+            alt={pelicula.titulo}
+            style={{ width: "100%", maxWidth: "500px", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.5)" }}
+          />
         </div>
-      </section>
 
-      {/* ===== SECCIÓN FAVORITOS CON NUEVO ESTILO ===== */}
-      <section>
-        <h3 style={{ marginBottom: "15px" }}>Mi Lista de Favoritos</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {favoritos.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Tu lista está vacía.</p> :
-            favoritos.map((fav, i) => (
-              <div key={i} style={{ background: "#222", padding: "12px 15px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center", borderLeft: "4px solid #ff9800", boxShadow: "0 4px 6px rgba(0,0,0,0.2)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-                  <span style={{ fontWeight: "bold" }}>{fav.titulo}</span>
+        <p style={{ marginTop: "20px", color: "#bbb", lineHeight: "1.6", textAlign: "justify" }}>
+          {pelicula.descripcion}
+        </p>
+
+        {/* Botones de Acción integrados en el contenedor izquierdo */}
+        <div style={{ display: "flex", gap: "15px", justifyContent: "center", marginTop: "25px" }}>
+          <Button
+            text={esFavorito ? "Quitar de Favoritos" : "Agregar a Favoritos"}
+            onClick={agregarFavoritos}
+          />
+          <Button text="Escribir Comentario" onClick={() => setMostrarModal(true)} />
+        </div>
+      </div>
+
+      {/* CONTENEDOR DERECHO: Funcionalidad e Interacción */}
+      <div style={{
+        flex: "1.2",
+        minWidth: "320px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "30px"
+      }}>
+
+        {/* Formulario Compra */}
+        <section style={{ background: "#1a1a1a", padding: "20px", borderRadius: "10px", border: "1px solid #333" }}>
+          <h3 style={{ borderBottom: "2px solid #ff9800", paddingBottom: "10px", marginTop: 0 }}>Comprar boletos</h3>
+          <form onSubmit={manejarCompra} style={{ marginTop: "15px" }}>
+            <label>Nombre:</label>
+            <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} style={{ display: "block", width: "100%", padding: "10px", margin: "8px 0", background: "#333", border: "1px solid #444", color: "white", borderRadius: "5px" }} required />
+            <label>Boletos:</label>
+            <input type="number" min="1" value={cantidadBoletos} onChange={(e) => setCantidadBoletos(e.target.value)} style={{ display: "block", width: "100%", padding: "10px", margin: "8px 0", background: "#333", border: "1px solid #444", color: "white", borderRadius: "5px" }} required />
+            <button type="submit" style={{ padding: "10px 20px", backgroundColor: "#ff9800", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontWeight: "bold", width: "100%" }}>Comprar</button>
+          </form>
+          {mensaje && <p style={{ color: "#4caf50", marginTop: "10px" }}>{mensaje}</p>}
+        </section>
+
+        {/* Sección Reseñas */}
+        <section>
+          <h3 style={{ marginBottom: "15px" }}>Reseñas de usuarios</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {listaComentarios.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Aún no hay reseñas...</p> :
+              listaComentarios.map((c, i) => (
+                <div key={i} style={{ background: "#222", padding: "15px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center", borderLeft: "4px solid #ff9800", boxShadow: "0 4px 6px rgba(0,0,0,0.2)" }}>
+                  <span>{c}</span>
+                  <button onClick={() => eliminarComentario(i)} style={{ background: "transparent", color: "#ff4444", border: "none", cursor: "pointer", fontSize: "1.2rem", marginLeft: "10px" }}>✕</button>
                 </div>
-                <button onClick={() => eliminarFavoritoDeLista(fav.titulo)} style={{ background: "transparent", color: "#ff4444", border: "none", cursor: "pointer", fontSize: "1.2rem" }}>✕</button>
-              </div>
-            ))
-          }
-        </div>
-      </section>
+              ))
+            }
+          </div>
+        </section>
+
+        {/* Sección Favoritos */}
+        <section>
+          <h3 style={{ marginBottom: "15px" }}>Mi Lista de Favoritos</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {favoritos.length === 0 ? <p style={{ color: "#666", fontStyle: "italic" }}>Tu lista está vacía.</p> :
+              favoritos.map((fav, i) => (
+                <div key={i} style={{ background: "#222", padding: "12px 15px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center", borderLeft: "4px solid #ff9800", boxShadow: "0 4px 6px rgba(0,0,0,0.2)" }}>
+                  <span style={{ fontWeight: "bold" }}>{fav.titulo}</span>
+                  <button onClick={() => eliminarFavoritoDeLista(fav.titulo)} style={{ background: "transparent", color: "#ff4444", border: "none", cursor: "pointer", fontSize: "1.2rem" }}>✕</button>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
 
       {/* Modal de Comentarios */}
       {mostrarModal && (
